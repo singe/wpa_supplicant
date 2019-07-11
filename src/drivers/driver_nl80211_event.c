@@ -2479,7 +2479,7 @@ static void do_process_drv_event(struct i802_bss *bss, int cmd,
 		break;
 	case NL80211_CMD_AUTHENTICATE:
 	case NL80211_CMD_ASSOCIATE:
-	case NL80211_CMD_DEAUTHENTICATE:
+	//case NL80211_CMD_DEAUTHENTICATE: //singe - ignore deauth
 	case NL80211_CMD_DISASSOCIATE:
 	case NL80211_CMD_FRAME_TX_STATUS:
 	case NL80211_CMD_UNPROT_DEAUTHENTICATE:
@@ -2517,11 +2517,13 @@ static void do_process_drv_event(struct i802_bss *bss, int cmd,
 				     tb[NL80211_ATTR_CENTER_FREQ1],
 				     tb[NL80211_ATTR_CENTER_FREQ2]);
 		break;
+/* singe - ignore deauth
 	case NL80211_CMD_DISCONNECT:
 		mlme_event_disconnect(drv, tb[NL80211_ATTR_REASON_CODE],
 				      tb[NL80211_ATTR_MAC],
 				      tb[NL80211_ATTR_DISCONNECTED_BY_AP]);
 		break;
+*/
 	case NL80211_CMD_MICHAEL_MIC_FAILURE:
 		mlme_event_michael_mic_failure(bss, tb);
 		break;
@@ -2547,9 +2549,11 @@ static void do_process_drv_event(struct i802_bss *bss, int cmd,
 	case NL80211_CMD_NEW_STATION:
 		nl80211_new_station_event(drv, bss, tb);
 		break;
+/* singe - ignore deauth
 	case NL80211_CMD_DEL_STATION:
 		nl80211_del_station_event(drv, bss, tb);
 		break;
+*/
 	case NL80211_CMD_SET_REKEY_OFFLOAD:
 		nl80211_rekey_offload_event(drv, tb);
 		break;
